@@ -1,0 +1,1 @@
+cmd_/root/kernel_dev/call1/kmonitor.ko := ld -r -m elf_x86_64 -T /usr/src/kernels/3.6.10-2.fc16.x86_64/scripts/module-common.lds --build-id  -o /root/kernel_dev/call1/kmonitor.ko /root/kernel_dev/call1/kmonitor.o /root/kernel_dev/call1/kmonitor.mod.o

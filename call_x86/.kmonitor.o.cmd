@@ -1,0 +1,1 @@
+cmd_/root/kernel_dev/call1/kmonitor.o := ld -m elf_x86_64   -r -o /root/kernel_dev/call1/kmonitor.o /root/kernel_dev/call1/mkm.o /root/kernel_dev/call1/hooks.o /root/kernel_dev/call1/mkm_netlink_if.o /root/kernel_dev/call1/utils.o 

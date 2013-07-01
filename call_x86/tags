@@ -1,0 +1,70 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+EXTRA_CFLAGS	Makefile	/^EXTRA_CFLAGS=-I$(PWD)\/include$/;"	m
+HOOKS_NEW_H	include/hooks.h	2;"	d
+MKM_NETLINK_IF_H	include/mkm_netlink_if.h	2;"	d
+MKM_NEW_H	include/mkm.h	2;"	d
+NETLINK_MKM	mkm_netlink_if.c	11;"	d	file:
+SYSCALL	include/mkm.h	/^}SYSCALL;$/;"	t	typeref:struct:__anon1
+UTILS_H	include/utils.h	2;"	d
+__this_module	kmonitor.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	kmonitor.mod.c	/^__used$/;"	v	file:
+acquire_sys_call_table	mkm.c	/^static unsigned long **acquire_sys_call_table(void)$/;"	f	file:
+disable_page_protection	mkm.c	/^static void disable_page_protection(void)$/;"	f	file:
+enable_page_protection	mkm.c	/^static void enable_page_protection(void)$/;"	f	file:
+get_inode	utils.c	/^unsigned long get_inode(void)$/;"	f
+hooks_sys_read	hooks.c	/^long hooks_sys_read(unsigned int fd,char __user *buf, size_t count)$/;"	f
+inode	include/mkm.h	/^    unsigned long inode;$/;"	m	struct:__anon1
+kmonitor-objs	Makefile	/^kmonitor-objs := mkm.o hooks.o mkm_netlink_if.o utils.o$/;"	m
+mem_loc	include/mkm.h	/^    unsigned long mem_loc;$/;"	m	struct:__anon1
+mkm_mod_end	mkm.c	/^module_exit(mkm_mod_end);$/;"	v
+mkm_mod_end	mkm.c	/^static void __exit mkm_mod_end(void)$/;"	f	file:
+mkm_mod_start	mkm.c	/^module_init(mkm_mod_start);$/;"	v
+mkm_mod_start	mkm.c	/^static int __init mkm_mod_start(void)$/;"	f	file:
+mkm_nl_close	mkm_netlink_if.c	/^void mkm_nl_close(void)$/;"	f
+mkm_nl_init	mkm_netlink_if.c	/^void mkm_nl_init(void)$/;"	f
+mkm_nl_mutex	mkm_netlink_if.c	/^DEFINE_MUTEX(mkm_nl_mutex);$/;"	v
+mkm_nl_send_syscall	mkm_netlink_if.c	/^int mkm_nl_send_syscall(SYSCALL *msg)$/;"	f
+mkm_userspace_pid	mkm_netlink_if.c	/^pid_t mkm_userspace_pid;$/;"	v
+nl_sock	mkm_netlink_if.c	/^static struct sock *nl_sock;$/;"	v	typeref:struct:sock	file:
+obj-m	Makefile	/^obj-m := kmonitor.o$/;"	m
+pid	include/mkm.h	/^    pid_t pid;$/;"	m	struct:__anon1
+recv_msg	mkm_netlink_if.c	/^static void recv_msg(struct sk_buff *skb)$/;"	f	file:
+ref_sys_accept	hooks.c	/^long (*ref_sys_accept)(int,struct sockaddr __user *,int __user *) = NULL;$/;"	v
+ref_sys_bind	hooks.c	/^long (*ref_sys_bind)(int,struct sockaddr __user *,int) = NULL;$/;"	v
+ref_sys_call_table	mkm.c	/^static unsigned long **ref_sys_call_table;$/;"	v	file:
+ref_sys_close	hooks.c	/^long (*ref_sys_close)(unsigned int fd) = NULL;$/;"	v
+ref_sys_connect	hooks.c	/^long (*ref_sys_connect)(int,struct sockaddr __user *,int) = NULL;$/;"	v
+ref_sys_exit	hooks.c	/^long (*ref_sys_exit)(int error_code) = NULL;$/;"	v
+ref_sys_exit_group	hooks.c	/^long (*ref_sys_exit_group)(int error_code) = NULL;$/;"	v
+ref_sys_getegid	hooks.c	/^long (*ref_sys_getegid)(void) = NULL;$/;"	v
+ref_sys_geteuid	hooks.c	/^long (*ref_sys_geteuid)(void) = NULL;$/;"	v
+ref_sys_getpid	hooks.c	/^long (*ref_sys_getpid)(void) = NULL;$/;"	v
+ref_sys_gettid	hooks.c	/^long (*ref_sys_gettid)(void) = NULL;$/;"	v
+ref_sys_ioctl	hooks.c	/^long (*ref_sys_ioctl)(unsigned int fd,unsigned int cmd,unsigned long arg) = NULL;$/;"	v
+ref_sys_kill	hooks.c	/^long (*ref_sys_kill)(int pid,int sig) = NULL;$/;"	v
+ref_sys_listen	hooks.c	/^long (*ref_sys_listen)(int,int) = NULL;$/;"	v
+ref_sys_lseek	hooks.c	/^long (*ref_sys_lseek)(unsigned int fd,off_t offset,unsigned int origin)= NULL;$/;"	v
+ref_sys_mkdir	hooks.c	/^long (*ref_sys_mkdir)(const char __user *pathname,int mode) = NULL;$/;"	v
+ref_sys_mount	hooks.c	/^long (*ref_sys_mount)(char __user *dev_name,char __user *dir_name,char __user *type,unsigned long flags,void __user *data) = NULL;$/;"	v
+ref_sys_open	hooks.c	/^long (*ref_sys_open)(const char __user *filename,int flags,int mode) = NULL;$/;"	v
+ref_sys_prctl	hooks.c	/^long (*ref_sys_prctl)(int option,unsigned long arg2,unsigned long arg3,unsigned long arg4,unsigned long arg5) = NULL;$/;"	v
+ref_sys_read	hooks.c	/^long (*ref_sys_read)(unsigned int fd, char __user *buf,size_t count) = NULL;$/;"	v
+ref_sys_recvfrom	hooks.c	/^long (*ref_sys_recvfrom)(int,void __user *,size_t,unsigned, struct sockaddr __user *,int __user *) = NULL;$/;"	v
+ref_sys_recvmsg	hooks.c	/^long (*ref_sys_recvmsg)(int fd,struct msghdr __user *msg,unsigned flags) = NULL;$/;"	v
+ref_sys_rmdir	hooks.c	/^long (*ref_sys_rmdir)(const char __user *pathname) = NULL;$/;"	v
+ref_sys_sendmsg	hooks.c	/^long (*ref_sys_sendmsg)(int fd,struct msghdr __user *msg,unsigned flags) = NULL;$/;"	v
+ref_sys_sendto	hooks.c	/^long (*ref_sys_sendto)(int,void __user *,size_t,unsigned,struct sockaddr __user *,int) = NULL;$/;"	v
+ref_sys_setgid	hooks.c	/^long (*ref_sys_setgid)(gid_t gid) = NULL;$/;"	v
+ref_sys_setuid	hooks.c	/^long (*ref_sys_setuid)(uid_t uid) = NULL;$/;"	v
+ref_sys_shutdown	hooks.c	/^long (*ref_sys_shutdown)(int,int) = NULL;$/;"	v
+ref_sys_umount	hooks.c	/^long (*ref_sys_umount)(char __user *name, int flags) = NULL;$/;"	v
+ref_sys_waitid	hooks.c	/^long (*ref_sys_waitid)(int which,pid_t pid, struct siginfo __user *infop,int options,struct rusage __user *ru) = NULL;$/;"	v
+ref_sys_write	hooks.c	/^long (*ref_sys_write)(unsigned int fd, const char __user *buf,size_t count) = NULL;$/;"	v
+reg_hooks	hooks.c	/^void reg_hooks(unsigned long **syscall_table)$/;"	f
+sys_id	include/mkm.h	/^    int sys_id;$/;"	m	struct:__anon1
+unreg_hooks	hooks.c	/^void unreg_hooks(unsigned long **syscall_table)$/;"	f

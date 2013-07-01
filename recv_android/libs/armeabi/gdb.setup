@@ -1,0 +1,2 @@
+set solib-search-path /root/kernel_dev/arecv/obj/local/armeabi
+directory /root/android-ndk/android-ndk-r8e/platforms/android-3/arch-arm/usr/include /root/kernel_dev/arecv/jni/include /root/android-ndk/android-ndk-r8e/sources/cxx-stl/system
