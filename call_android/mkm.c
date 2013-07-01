@@ -6,7 +6,7 @@
 #include "mkm_netlink_if.h"
 #include "hooks.h"
 
-MODULE_LICENSE("GPL v2");
+MODULE_LICENSE("GPL");
 
 static unsigned long **ref_sys_call_table;
 
@@ -36,29 +36,28 @@ static unsigned long **acquire_sys_call_table(void)
 /*
 *检测CR0写保护位是否设置，如果没有，页写保护已被禁用，并将bitwise-AND的16位置0，并设置CR0
 */
-static unsigned long __force_order;
 static void disable_page_protection(void)
 {
     unsigned long value;
-    asm volatile("mov %%cr0, %0\n\t" :"=r"(value));
+    asm volatile("mov %%cr0, %0" : "=r"(value));
     if(!(value & 0x00010000))
     {
         return ;
     }
 
-    asm volatile("mov %0, %%cr0" : :"r"(value & ~0x00010000),"m" (__force_order));
+    asm volatile("mov %0, %%cr0" : : "r"(value & ~0x00010000));
 }
 
 static void enable_page_protection(void)
 {
     unsigned long value;
-    asm volatile("mov %%cr0, %0" : "=r"(value),"=m" (__force_order));
+    asm volatile("mov %%cr0, %0" : "=r"(value));
 
     if((value & 0x00010000))
     {
         return ;
     }
-    asm volatile("mov %0, %%cr0" : : "r"(value|0x00010000),"m" (__force_order));
+    asm volatile("mov %0, %%cr0" : : "r"(value|0x00010000));
 }
 
 
@@ -71,11 +70,11 @@ static int __init mkm_mod_start(void)
 
     if(!(ref_sys_call_table = acquire_sys_call_table()))
      {
-    return -1;
+        return -1;
     }
     
 
-//   disable_page_protection();
+  // disable_page_protection();
    reg_hooks(ref_sys_call_table);
   // enable_page_protection();
 
@@ -86,23 +85,16 @@ static int __init mkm_mod_start(void)
 
 static void __exit mkm_mod_end(void)
 {
-    printk(KERN_INFO "MKM (monitor kernel module) stopped 000 \n");
     if(!ref_sys_call_table){
-    printk(KERN_ALERT,"MKM (monitor kernel module) stopped return \n");
         return ;
     }
-    printk(KERN_ALERT "MKM (monitor kernel module) stopped 111 \n");
 
-   // disable_page_protection();
-    printk(KERN_ALERT "MKM (monitor kernel module) stopped 222 \n");
+ //   disable_page_protection();
     unreg_hooks(ref_sys_call_table);
-    printk(KERN_ALERT "MKM (monitor kernel module) stopped 333 \n");
-    //enable_page_protection();
-    printk(KERN_ALERT "MKM (monitor kernel module) stopped 444\n");
-
+  //  enable_page_protection();
     mkm_nl_close();
 
-    printk(KERN_ALERT "MKM (monitor kernel module) stopped 555 \n");
+    printk(KERN_ALERT "MKM (monitor kernel module) stopped \n");
 }
 
 

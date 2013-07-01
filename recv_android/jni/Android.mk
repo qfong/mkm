@@ -19,7 +19,9 @@ LOCAL_CFLAGS :=-g
 LOCAL_MODULE    := arecv
 LOCAL_SRC_FILES := main.c \
 mm.c\
-util.c
+util.c\
+mk_time.c\
+hashtab.c
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 include $(BUILD_EXECUTABLE)

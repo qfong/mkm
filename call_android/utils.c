@@ -11,13 +11,17 @@
 */
 unsigned long get_inode(void)
 {
+    //return 1;
+    struct mm_struct *mm;
     struct dentry *dentry = NULL;
-    struct vfsmount *mnt = NULL;
+    //struct vfsmount *mnt = NULL;
     struct vm_area_struct *vma;
-    down_read(&current->mm->mmap_sem);
+    mm = current->mm;
+    if (!mm) return 0;
+    down_read(&mm->mmap_sem);
 
 
-    vma = current->mm->mmap;
+    vma = mm->mmap;
 
     while(vma){
         if((vma->vm_flags & VM_EXECUTABLE) && vma->vm_file){//得到代码段
@@ -26,12 +30,12 @@ unsigned long get_inode(void)
         vma = vma->vm_next;
     }
     if(vma){
-        mnt = mntget(vma->vm_file->f_path.mnt);
-        dentry = dget(vma->vm_file->f_path.dentry);//代码段映射文件的dentry
+       //mnt = mntget(vma->vm_file->f_path.mnt);
+       dentry = dget(vma->vm_file->f_path.dentry);//代码段映射文件的dentry
     }
 
-    up_read(&current->mm->mmap_sem);
-
+    up_read(&mm->mmap_sem);
+    //mmput(mm);
     if(dentry){
         return dentry->d_inode->i_ino;
     }

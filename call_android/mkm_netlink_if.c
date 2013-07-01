@@ -41,14 +41,12 @@ int mkm_nl_send_syscall(SYSCALL *msg)
 
 static void recv_msg(struct sk_buff *skb)
 {
-    printk(KERN_INFO "MKM(monitor kernel module) recv msg\n");
     struct nlmsghdr *nlh;
     pid_t   pid;
     struct sk_buff *skb_out;
     int msg_size;
     char *msg="mkm-ack";
     int res;
-    printk(KERN_INFO "MKM(monitor kernel module) recv msg\n");
     mutex_lock(&mkm_nl_mutex);
     msg_size = strlen(msg);
     nlh = nlmsg_hdr(skb);

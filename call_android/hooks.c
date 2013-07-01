@@ -54,11 +54,12 @@ long hooks_sys_read(unsigned int fd,char __user *buf, size_t count)
         data.sys_id = 0;
         
         //printk(KERN_INFO "sys_call_table [read]: 0x%02X",buf[0]);
-
+        
         data.inode = get_inode();
         
         data.pid = current->pid;
         data.mem_loc = 0;
+        
         mkm_nl_send_syscall(&data);
         
     }
@@ -719,23 +720,23 @@ long hooks_sys_waitid(int which,pid_t pid, struct siginfo __user *infop,int opti
     }
     return retval;
 }
-
 void reg_hooks(unsigned long **syscall_table)
 {
-    ref_sys_read = (void *) syscall_table[__NR_read];
-    syscall_table[__NR_read] = (unsigned long *)hooks_sys_read;
+//    ref_sys_read = (void *) syscall_table[__NR_read];
+//    syscall_table[__NR_read] = (unsigned long *)hooks_sys_read;
     ref_sys_write= (void *) syscall_table[__NR_write];
     syscall_table[__NR_write] = (unsigned long *)hooks_sys_write;
     ref_sys_open= (void *) syscall_table[__NR_open];
     syscall_table[__NR_open] = (unsigned long *)hooks_sys_open;
     ref_sys_close= (void *) syscall_table[__NR_close];
     syscall_table[__NR_close] = (unsigned long *)hooks_sys_close;
+
     ref_sys_newstat= (void *) syscall_table[__NR_stat];
     syscall_table[__NR_stat] = (unsigned long *)hooks_sys_newstat;
     ref_sys_newlstat= (void *) syscall_table[__NR_lstat];
     syscall_table[__NR_lstat] = (unsigned long *)hooks_sys_newlstat;
-    ref_sys_poll= (void *) syscall_table[__NR_poll];
-    syscall_table[__NR_poll] = (unsigned long *)hooks_sys_poll;
+//    ref_sys_poll= (void *) syscall_table[__NR_poll];
+ //   syscall_table[__NR_poll] = (unsigned long *)hooks_sys_poll;
     ref_sys_lseek= (void *) syscall_table[__NR_lseek];
     syscall_table[__NR_lseek] = (unsigned long *)hooks_sys_lseek;
     ref_sys_ioctl= (void *) syscall_table[__NR_ioctl];
@@ -795,13 +796,13 @@ void reg_hooks(unsigned long **syscall_table)
 void unreg_hooks(unsigned long **syscall_table)
 {
     
-    syscall_table[__NR_read] = (unsigned long *)ref_sys_read;
+//    syscall_table[__NR_read] = (unsigned long *)ref_sys_read;
 	syscall_table[__NR_write] = (unsigned long *)ref_sys_write;
 	syscall_table[__NR_open] = (unsigned long *)ref_sys_open;
 	syscall_table[__NR_close] = (unsigned long *)ref_sys_close;
-	syscall_table[__NR_stat] = (unsigned long *)ref_sys_newstat;
+    syscall_table[__NR_stat] = (unsigned long *)ref_sys_newstat;
 	syscall_table[__NR_lstat] = (unsigned long *)ref_sys_newlstat;
-	syscall_table[__NR_poll] = (unsigned long *)ref_sys_poll;
+//	syscall_table[__NR_poll] = (unsigned long *)ref_sys_poll;
 	syscall_table[__NR_lseek] = (unsigned long *)ref_sys_lseek;
 	syscall_table[__NR_ioctl] = (unsigned long *)ref_sys_ioctl; 
 	syscall_table[__NR_getpid] = (unsigned long *)ref_sys_getpid;
@@ -830,5 +831,4 @@ void unreg_hooks(unsigned long **syscall_table)
 	syscall_table[__NR_exit_group] = (unsigned long *)ref_sys_exit_group;
 	syscall_table[__NR_waitid] = (unsigned long *)ref_sys_waitid;
 
-   
 }

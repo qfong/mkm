@@ -12,22 +12,18 @@
 #include <pwd.h>
 #include <sched.h>
 
-
+#include "recv.h"
 #include "mm.h"
 #include "util.h"
-
+#include "hashtab.h"
+#include "mk_time.h"
 
 #define NETLINK_MKM 24
 #define MAX_PAYLOAD 1024
 
-typedef struct{
-    int sys_id;
-    unsigned long inode;
-    pid_t pid;
-    unsigned long mem_loc;
-}SYSCALL;
 
-int main(void)
+
+int rev(void)
 {
     struct sockaddr_nl src_addr,dest_addr;
     struct nlmsghdr *nlh = NULL;
@@ -50,45 +46,33 @@ int main(void)
         exit(1);
     }
     */
-    /*
+   
     if(mm_init()!= 0){
     sprintf(stderr,"Failed to initialize the memory manager.\n");
     exit(1);
    }
-   */
+   
     sock_fd = socket(AF_NETLINK,SOCK_DGRAM,NETLINK_MKM);
-    perror("socket kkkkk1\n");
 
     memset(&src_addr,0,sizeof(src_addr));
-    perror("socket kkkkk2\n");
     src_addr.nl_family = AF_NETLINK;
-    perror("socket kkkkk3\n");
     src_addr.nl_pid = getpid();
-    perror("socket kkkkk4\n");
 
     bind(sock_fd,(struct sockaddr*)&src_addr,sizeof(src_addr));
-    perror("bind kkkkk\n");
 
     memset(&dest_addr,0,sizeof(dest_addr));
-    perror("msmset dest_addr kkkkk\n");
     dest_addr.nl_family = AF_NETLINK;             
-    perror("bind kkkkk1\n");
     dest_addr.nl_pid = 0;   //kernel
-    perror("bind kkkkk2\n");
     dest_addr.nl_groups = 0;
-    perror("bind kkkkk3\n");
 
     nlh = (struct nlmsghdr*)malloc(NLMSG_SPACE(MAX_PAYLOAD));
-    perror("bind kkkkk4\n");
     memset(nlh, 0, NLMSG_SPACE(MAX_PAYLOAD));
-    perror("memset NLMSG_SPCAE kkkkk\n");
 
     nlh->nlmsg_len = NLMSG_SPACE(MAX_PAYLOAD);
     nlh->nlmsg_pid = getpid();
     nlh->nlmsg_flags = 0;
 
     strcpy(NLMSG_DATA(nlh),"mkm-syn");
-    perror("kkkkk\n");
     iov.iov_base = (void*) nlh;
     iov.iov_len = nlh->nlmsg_len;
 
@@ -101,8 +85,6 @@ int main(void)
     printf ("send message to kernel \n");
     int rets;
     rets=sendmsg(sock_fd,&msg,0);
-    perror("kkkkk\n");
-    printf("waiting for message from kerddd %d\n",rets);
     printf("waiting for message from kernel\n");
 
     recvmsg(sock_fd,&msg,0);
@@ -121,29 +103,79 @@ int main(void)
     //fds[1].fd = fd;
     //fds[1].events = POLLOUT;
     int i =1;
+	mk_uptr_t	cur;
+	cur = mk_current_msec;
     while(1){
-        
-       ret = poll(fds,2,-1);
-     if(ret == 0) printf("time out \n");
-      for (i=0;i<2;i++){
-            if(fds[i].revents & POLLIN){
-
-            recvmsg(fds[i].fd,&msg,0);
-        //    recvmsg(sock_fd,&msg,-1);
-            SYSCALL *data = (SYSCALL *)NLMSG_DATA(nlh);
-            printf("%i,%lu,%i,%llu\n",data->sys_id,data->inode,data->pid,count);
-         //store
-            memset(NLMSG_DATA(nlh),0,sizeof(SYSCALL));
-            count ++;
-
-           }
-           // if(fds[i].revents & POLLOUT){
-           //     printf("1222222222222\n");
-            }
-       // }
+			
+			
+			ret = poll(fds,2,-1);
+			if(ret == 0){
+				printf("time out \n");
+				continue ;
+			}
+			mk_time_update();
+			for (i=0;i<2;i++){
+				if(fds[i].revents & POLLIN){
+				recvmsg(sock_fd,&msg,0);
+				SYSCALL *data = (SYSCALL *)NLMSG_DATA(nlh);
+           // 	printf("%i,%lu,%i,%llu\n",data->sys_id,data->inode,data->pid,count);
+				analysis_handler(data);
+				//printf("%i,%lu,%i,%llu\n",data->sys_id,data->inode,data->pid,count);
+				memset(NLMSG_DATA(nlh),0,sizeof(SYSCALL));
+				count ++;
+				}
+		     		
+			}
+            
+			if(( mk_current_msec - cur) >50){
+				store_flags = 1;
+				hashtab_show(sys_ht);
+				hashtab_destroy(sys_ht);
+				sys_ht = hashtab_create(symhash,symcmp,1024);
+				cur = mk_current_msec;
+			}
+            
+           
     }
     return 0;
 
 
 
+}
+
+struct hashtab *ht;
+struct hashtab *sys_ht;
+
+int mk_daemon(void)
+{
+    int fd;
+    pid_t pid;
+    pid = fork();
+    switch(pid){
+    case -1:
+        return -1;
+    case 0:
+        break;
+    default : 
+        exit(0);
+    }
+    umask(0);
+    if ( setsid() <0) return -1;
+    fd = open("/dev/null",O_RDWR);
+    if(fd  == -1) return -1;
+
+    dup2(fd,STDIN_FILENO);
+    dup2(fd,STDOUT_FILENO);
+    return 0;
+}
+
+
+int main()
+{
+	mk_daemon();
+	mk_time_init();
+    mk_open_logfile();
+		sys_ht = hashtab_create(symhash,symcmp,1024);
+	printf("HELLO WORLD\n");
+	rev();
 }

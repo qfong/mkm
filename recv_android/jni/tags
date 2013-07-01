@@ -1,0 +1,104 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BLOCK_SIZE	include/mm.h	5;"	d
+HASHTAB_H	hashtab.h	2;"	d
+HASH_MAX_NODES	hashtab.h	3;"	d
+LOG_FILE	recv.h	10;"	d
+LOG_W_FILE	recv.h	11;"	d
+MAX_PAYLOAD	main.c	22;"	d	file:
+MK_TIME_SLOTS	time.c	7;"	d	file:
+MM_H	include/mm.h	2;"	d
+NETLINK_MKM	main.c	21;"	d	file:
+RECV_H	recv.h	2;"	d
+SYSCALL	recv.h	/^}SYSCALL;$/;"	t	typeref:struct:__anon3
+SYSCALLS_PER_BLOCK	include/mm.h	6;"	d
+SYSCALL_STORE	mm.c	/^}SYSCALL_STORE;$/;"	t	typeref:struct:__anon2	file:
+TIME_H	time.h	2;"	d
+UTIL_H	include/util.h	2;"	d
+add_block	mm.c	/^static int add_block(void)$/;"	f	file:
+analysis_handler	mm.c	/^ int analysis_handler(SYSCALL *data)$/;"	f
+block_lim	mm.c	/^int block_lim;$/;"	v
+block_n	mm.c	/^static unsigned long block_n;$/;"	v	file:
+block_p	mm.c	/^static void **block_p;$/;"	v	file:
+cached_time	time.c	/^static	mk_time_t		cached_time[MK_TIME_SLOTS];$/;"	v	file:
+count	hashtab.h	/^	unsigned long long count;$/;"	m	struct:id_node
+count	mm.c	/^	unsigned long long count;$/;"	m	struct:__anon2	file:
+create_list	hashtab.c	/^void create_list(struct hashtab_node *cur)$/;"	f
+datum	hashtab.h	/^	unsigned long	datum;$/;"	m	struct:hashtab_node
+drop_privileges	util.c	/^int drop_privileges(void)$/;"	f
+fd	mm.c	/^int fd;$/;"	v
+gmtoff	time.h	/^	mk_ptr_t	gmtoff;$/;"	m	struct:__anon1
+hash_value	hashtab.h	/^	int (*hash_value)(struct hashtab *h,const void *key);\/\/hash function$/;"	m	struct:hashtab
+hashtab	hashtab.h	/^struct hashtab{$/;"	s
+hashtab_create	hashtab.c	/^struct hashtab * hashtab_create(int (*hash_value)(struct hashtab *h,const void *key),int(*keycmp)(struct hashtab *h,const void *key1,const void *key2),int size)$/;"	f
+hashtab_delete	hashtab.c	/^int hashtab_delete(struct hashtab *h,void *key)$/;"	f
+hashtab_destroy	hashtab.c	/^void hashtab_destroy(struct hashtab *h)$/;"	f
+hashtab_info	hashtab.h	/^struct hashtab_info{$/;"	s
+hashtab_insert	hashtab.c	/^int hashtab_insert(struct hashtab *h,void *key,int pid,unsigned long datum,int id)$/;"	f
+hashtab_node	hashtab.h	/^struct hashtab_node{$/;"	s
+hashtab_search	hashtab.c	/^void *hashtab_search(struct hashtab *h,const void *key)$/;"	f
+hashtab_show	hashtab.c	/^int hashtab_show(struct hashtab *h)$/;"	f
+ht	main.c	/^struct hashtab *ht;$/;"	v	typeref:struct:hashtab
+htable	hashtab.h	/^	struct hashtab_node **htable;\/*hash table*\/$/;"	m	struct:hashtab	typeref:struct:hashtab::hashtab_node
+id	hashtab.h	/^	int id;$/;"	m	struct:id_node
+id_node	hashtab.h	/^struct id_node{$/;"	s
+idnode	hashtab.h	/^	struct id_node *idnode;$/;"	m	struct:hashtab_node	typeref:struct:hashtab_node::id_node
+iflags	hashtab.h	/^	int iflags;$/;"	m	struct:hashtab_node
+inode	mm.c	/^	unsigned long	inode;$/;"	m	struct:__anon2	file:
+inode	recv.h	/^    unsigned long inode;$/;"	m	struct:__anon3
+insert_list	hashtab.c	/^void insert_list(struct hashtab_node *cur,int id)$/;"	f
+key	hashtab.h	/^	void *key;$/;"	m	struct:hashtab_node
+keycmp	hashtab.h	/^	int (*keycmp)(struct hashtab *h,const void *key1,const void *key2);\/\/key comparison function;$/;"	m	struct:hashtab
+list_destroy	hashtab.c	/^int list_destroy(struct hashtab_node *cur)$/;"	f
+list_show	hashtab.c	/^int list_show(struct hashtab_node *cur)$/;"	f
+main	main.c	/^int main()$/;"	f
+max_chain_len	hashtab.h	/^	int max_chain_len;$/;"	m	struct:hashtab_info
+mem_loc	recv.h	/^    unsigned long mem_loc;$/;"	m	struct:__anon3
+mk_atomic_cmp_set	time.h	13;"	d
+mk_atomic_fetch_add	time.h	16;"	d
+mk_atomic_t	time.h	/^typedef 	unsigned long 	mk_atomic_t;$/;"	t
+mk_cached_time	time.c	/^volatile  mk_time_t		*mk_cached_time;$/;"	v
+mk_cpu_pause	time.h	24;"	d
+mk_cpu_pause	time.h	26;"	d
+mk_current_msec	time.c	/^volatile mk_uptr_t  		mk_current_msec;$/;"	v
+mk_gettimeofday	time.h	12;"	d
+mk_msec_t	time.h	/^typedef mk_uptr_t mk_msec_t;$/;"	t
+mk_open_logfile	mm.c	/^int mk_open_logfile(void)$/;"	f
+mk_ptr_t	time.h	/^typedef 	intptr_t 		mk_ptr_t;$/;"	t
+mk_sched_yield	time.h	35;"	d
+mk_time_init	time.c	/^void mk_time_init(void)$/;"	f
+mk_time_lock	time.c	/^static 	mk_atomic_t			mk_time_lock;$/;"	v	file:
+mk_time_t	time.h	/^}mk_time_t;$/;"	t	typeref:struct:__anon1
+mk_time_update	time.c	/^void mk_time_update(void)$/;"	f
+mk_tm_t	time.h	/^typedef 	struct tm		 mk_tm_t;$/;"	t	typeref:struct:tm
+mk_trylock	time.h	31;"	d
+mk_unlock	time.h	32;"	d
+mk_uptr_t	time.h	/^typedef 	uintptr_t 		mk_uptr_t;$/;"	t
+mm_init	mm.c	/^int mm_init(void)$/;"	f
+msec	time.h	/^	mk_uptr_t	msec;$/;"	m	struct:__anon1
+nel	hashtab.h	/^	int nel;						\/\/number of elements in hash table$/;"	m	struct:hashtab
+next	hashtab.h	/^	struct hashtab_node *next;$/;"	m	struct:hashtab_node	typeref:struct:hashtab_node::hashtab_node
+next	hashtab.h	/^	struct id_node *next;$/;"	m	struct:id_node	typeref:struct:id_node::id_node
+pid	hashtab.h	/^	int pid;$/;"	m	struct:hashtab_node
+pid	mm.c	/^	int 			pid;$/;"	m	struct:__anon2	file:
+pid	recv.h	/^    pid_t pid;$/;"	m	struct:__anon3
+rev	main.c	/^int rev(void)$/;"	f
+sec	time.h	/^	time_t		sec;$/;"	m	struct:__anon1
+set_rr_scheduler	util.c	/^int set_rr_scheduler(void)$/;"	f
+size	hashtab.h	/^	int size;						\/\/number of slots in hash table$/;"	m	struct:hashtab
+slot	time.c	/^static mk_uptr_t			slot;$/;"	v	file:
+slots_used	hashtab.h	/^	int slots_used;$/;"	m	struct:hashtab_info
+store_flags	mm.c	/^int store_flags;$/;"	v
+store_syscall	mm.c	/^int store_syscall(struct hashtab_node *input,struct id_node *inode)$/;"	f
+symcmp	hashtab.h	/^static int symcmp(struct hashtab *h,const void *key1,const void *key2)$/;"	f
+symhash	hashtab.h	/^static int symhash(struct hashtab *h,const void *key)$/;"	f
+sys_ht	main.c	/^struct hashtab *sys_ht;$/;"	v	typeref:struct:hashtab
+sys_id	mm.c	/^	int 			sys_id;$/;"	m	struct:__anon2	file:
+sys_id	recv.h	/^    int sys_id;$/;"	m	struct:__anon3
+syscall_n	mm.c	/^static unsigned long syscall_n;$/;"	v	file:
+wfd	mm.c	/^int wfd;$/;"	v
+write_to_blocks_to_file	mm.c	/^int write_to_blocks_to_file(void)$/;"	f
